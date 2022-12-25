@@ -11,12 +11,12 @@ const routes = [
     component: MainPage
   },
   {
-    path: '/your-bag',
-    name: 'bag',
+    path: '/your-cart',
+    name: 'cart',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/BagPage.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../components/CartPage/CartPage.vue')
   }
 ]
 

@@ -1,0 +1,74 @@
+{
+    "products": [
+        {
+            "name": "Vanilla Ice Cream",
+            "image": "/ice-cream-flavors-vanilla.jpg.webp",
+            "cost": 3.50,
+            "number": 1,
+            "description": "Made from vanilla bean, vanilla ice cream is delicious on its own but it’s often the flavor of choice when serving desserts a la mode. Apple pie, brownies, turon, and pisang goreng are just a few desserts we’ve tried that are made even more delicious by a scoop of vanilla ice cream."
+        },
+        {
+            "name": "Teaberry Ice Cream",
+            "image": "/ice-cream-flavors-teaberry.jpg.webp",
+            "cost": 3.80,
+            "number": 1,
+            "description": "The teaberry is a polarizing fruit. Like mint chocolate chip, people either love or hate teaberry ice cream because of its intensely minty, almost medicinal flavor that tastes nothing like berries."
+        },
+        {
+            "name": "Strawberry Ice Cream",
+            "image": "/ice-cream-flavors-strawberry.jpg.webp",
+            "cost": 2.90,
+            "number": 1,
+            "description": "Strawberry completes the holy trinity of simple but quintessentially delicious ice cream flavors. It can be made with strawberry flavoring but the best versions are made with fresh strawberries blended in with eggs, cream, sugar, and vanilla."
+        },
+        {
+            "name": "Mint Chocolate Ice Cream",
+            "image": "/ice-cream-flavors-mint-chocolate-chip.jpg.webp",
+            "cost": 4.00,
+            "number": 1,
+            "description": "To its detractors, this refreshing blend of mint and chocolate tastes like toothpaste. Personally, it isn’t my favorite ice cream flavor but I say to each his own!"
+        },
+        {
+            "name": "Matcha Ice Cream",
+            "image": "/ice-cream-flavors-matcha.jpg.webp",
+            "cost": 3.70,
+            "number": 1,
+            "description": "Matcha refers to the finely ground powder made from green tea leaves. Aside from being an integral component in Japanese tea ceremonies, it’s a commonly used ingredient in many Japanese food products like cakes, cookies, crackers, and candy. Earthy and a bit grassy, it has a unique and complex flavor that’s difficult to describe."
+        },
+        {
+            "name": "Eggnog Ice Cream",
+            "image": "/ice-cream-flavors-eggnog.jpg.webp",
+            "cost": 3.80,
+            "number": 1,
+            "description": "Needless to say, if you’re a fan of that incredibly rich and creamy gift to humankind known as eggnog, then you’re going to love this ice cream. It already tastes like ice cream so it only makes sense to eat it as ice cream!"
+        },
+        {
+            "name": "Chocolate Ice Cream",
+            "image": "/ice-cream-flavors-chocolate.jpg.webp",
+            "cost": 3.00,
+            "number": 1,
+            "description": "Chocolate ice cream is typically made by blending cocoa powder with eggs, cream, sugar, and vanilla. All types of chocolate ice cream are heavenly but personally, we love the versions made with dark chocolate. The richness and slight bitterness of the dark chocolate is to die for."
+        },
+        {
+            "name": "Chocolate Chip Ice Cream",
+            "image": "/ice-cream-flavors-chocolate-chip.jpg.webp",
+            "cost": 3.30,
+            "number": 1,
+            "description": "As delicious as it is, vanilla can sometimes be boring but the chocolate chips give the ice cream texture and little punches of chocolate flavor."
+        },
+        {
+            "name": "Pistachio Ice Cream",
+            "image": "/ice-cream-flavors-pistachio.jpg.webp",
+            "cost": 4.00,
+            "number": 1,
+            "description": "Pistachio is another of my personal favorite flavors of ice cream. Known for its distinctively pale green color, it has a wonderfully nutty flavor derived from finely ground pistachios and almond paste."
+        },
+        {
+            "name": "Butter Pecan Ice Cream",
+            "image": "/ice-cream-flavors-butter-pecan.jpg.webp",
+            "cost": 3.70,
+            "number": 1,
+            "description": "Butter pecan ice cream is a rich, buttery, and nutty ice cream flavor that’s popular mostly in the US. It’s essentially vanilla ice cream enriched with whole pecans toasted in browned butter. Need I say more?"
+        }
+    ]
+}
