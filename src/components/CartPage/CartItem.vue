@@ -45,12 +45,17 @@ img {
     border-radius: 6px;
 }
 
-.text , .quantity{
+.text, .quantity {
     font-family: SomeCoolFont;
     color: #490a43;
     font-weight: 500;
     padding-top: 7px;
-    font-size: 23px;
+    font-size: 18px;
+}
+
+.total {
+    font-family: SomeCoolFont;
+    font-size: 19px;
 }
 
 .delete {

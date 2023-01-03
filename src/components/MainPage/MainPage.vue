@@ -6,7 +6,11 @@
       </li>
       <li><button class="bag"><router-link to="/your-cart"><img src="../assets/bagPng.png"
               class="bag-img"></router-link>
-        </button></li>
+        </button>
+        <button class="bag"><router-link to="/your-profile"><img src="../assets/Sample_User_Icon.png"
+              class="bag-img"></router-link>
+        </button>
+      </li>
     </div>
 
     <div class="goods-body">
@@ -29,7 +33,6 @@ export default {
   data: () => {
     return {
       cart: [],
-      
     }
   },
   computed: {
@@ -70,7 +73,7 @@ img {
 }
 
 .text {
-  font-family: SomeCoolFont;
+  font-family: SomeCoolFont2;
   color: #490a43;
   font-weight: 500;
   padding-top: 7px;
@@ -113,7 +116,7 @@ img {
   margin-right: 400px;
   font-family: SomeCoolFont;
   font-weight: 800;
-  font-size: 65px;
+  font-size: 55px;
   color: #74166a;
 }
 
@@ -164,11 +167,11 @@ a {
 
 @font-face {
   font-family: SomeCoolFont;
-  src: '../assets/Genshin_Impact.ttf';
+  src: url('../assets/Genshin_Impact.ttf');
 }
 
 @font-face {
   font-family: SomeCoolFont2;
-  src: '../assets/beer-money12.ttf';
+  src: url('../assets/beer-money12.ttf');
 }
 </style>
