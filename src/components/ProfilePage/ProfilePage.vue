@@ -24,7 +24,7 @@
 
         <div class="orders">
             <div class="text" @click="getOrders()">Your previous orders</div>
-            <SingleOrder :order_data="ORDERS" v-for="item in ORDERS" :key="item.date" :order_item_data="item">
+            <SingleOrder :order_data="ORDERS" v-for="item in ORDERS" :key="item" :order_item_data="item">
             </SingleOrder>
         </div>
 
@@ -102,7 +102,7 @@ li {
     font-weight: 500;
     padding-top: 7px;
     font-size: 18px;
-    margin-right: 30px;
+    cursor: pointer;
 }
 
 .row {
@@ -164,6 +164,7 @@ input {
     text-align: center;
     font-size: 22px;
     border: 0cm;
+    margin-left: 30px;
 }
 
 .submit {

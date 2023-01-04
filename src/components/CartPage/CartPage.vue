@@ -47,7 +47,7 @@ export default {
         result = result.reduce(function (sum, el) {
           return sum + el;
         })
-        return result;
+        return result.toFixed(1);
       }
       return 0;
     }
@@ -63,7 +63,8 @@ export default {
   methods: {
     ...mapActions([
       'DELETE_FROM_CART',
-      'DELETE_ALL'
+      'DELETE_ALL',
+      'ADD_TO_CART_FROM_LOCAL'
     ]),
     deleteFromCart(index) {
       this.DELETE_FROM_CART(index)
@@ -83,7 +84,8 @@ export default {
           goods: []
         }
         let res = Object.create(order);
-        res.date = (new Date());
+        res.date = (' ' + new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate() + ' ' +
+          new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds());
         for(let index of this.CART) {
           res.cost += index.number * index.cost;
         }
@@ -97,6 +99,9 @@ export default {
         this.CART.splice(this.CART[0], this.CART.length);
       }
     }
+  },
+  mounted() {
+    this.ADD_TO_CART_FROM_LOCAL()
   }
 }
 </script>

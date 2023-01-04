@@ -23,7 +23,7 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_ORDERS: (state) => {
-      if (state.orders.length) {
+      if (!state.orders.length) {
         let counterOrders = 1;
         while (sessionStorage.getItem(counterOrders)) {
           state.orders.push(sessionStorage.getItem(counterOrders));
@@ -35,7 +35,7 @@ export default new Vuex.Store({
       state.products = products;
     },
     SET_CART: (state, product) => {
-      if (state.cart.length) {
+      if (state.cart.length) { //на случай если страница не обновлялась
         let isProductExist = false;
         state.cart.map(function (item) {
           if (item.name === product.name) {
@@ -52,8 +52,31 @@ export default new Vuex.Store({
           }
         }
       }
-      else {
-        state.cart.push(product)
+      else { //page reloaded
+        //to do HERE
+        // state.products.map( function (item) {
+        //   if(sessionStorage.getItem(item.name)) {
+        //     if(product.name === item.name) {
+        //       product.number += 1;
+        //     }
+        //     state.cart.push(item); 
+        //   }
+          
+        // })
+        // if(!sessionStorage.getItem(product.name)) {
+        //   state.cart.push(product);
+        // }
+        //
+        state.cart.push(product);
+      }
+    },
+    SET_CART_FROM_LOCAL: (state) => {
+      if (!state.cart.length) {
+        for (let item of state.products) {
+          if (sessionStorage.getItem(item)) {
+            state.cart.push(item);
+          }
+        }
       }
     },
     REMOVE_FROM_CART: (state, index) => {
@@ -66,7 +89,7 @@ export default new Vuex.Store({
         state.cart.splice(index, 1);
       }
     },
-    REMOVE_ALL_FROM_CART: (state, index) => {
+    REMOVE_ALL_FROM_CART: (index) => {
       if(sessionStorage.getItem(index.name)) {
         sessionStorage.removeItem(index.name);
       }
@@ -97,6 +120,10 @@ export default new Vuex.Store({
     },
     DELETE_ALL({ commit }, index) {
       commit('REMOVE_ALL_FROM_CART', index)
+    },
+    //experimental stuff for loading cart from storage
+    ADD_TO_CART_FROM_LOCAL({ commit }) {
+      commit('SET_CART_FROM_LOCAL')
     }
   },
   modules: {
