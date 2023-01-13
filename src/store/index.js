@@ -25,8 +25,8 @@ export default new Vuex.Store({
     SET_ORDERS: (state) => {
       if (!state.orders.length) {
         let counterOrders = 1;
-        while (sessionStorage.getItem(counterOrders)) {
-          state.orders.push(sessionStorage.getItem(counterOrders));
+        while (localStorage.getItem(counterOrders)) {
+          state.orders.push(localStorage.getItem(counterOrders));
           counterOrders++;
         }
       }
@@ -40,41 +40,28 @@ export default new Vuex.Store({
         state.cart.map(function (item) {
           if (item.name === product.name) {
             isProductExist = true;
-            item.number = item.number + 1;
+            item.number = Math.max(item.number, JSON.parse(localStorage.getItem(`${item.name}`)).number) + 1;
+            localStorage.setItem(`${item.name}`, JSON.stringify(item));
           }
         })
         if (!isProductExist) {
-          if (sessionStorage.getItem(product.name)) {
-            state.cart.push(sessionStorage.getItem(product.name))
+          if (localStorage.getItem(product.name)) {
+            state.cart.push(localStorage.getItem(product.name))
           }
           else {
             state.cart.push(product);
           }
         }
       }
-      else { //page reloaded
-        //to do HERE
-        // state.products.map( function (item) {
-        //   if(sessionStorage.getItem(item.name)) {
-        //     if(product.name === item.name) {
-        //       product.number += 1;
-        //     }
-        //     state.cart.push(item); 
-        //   }
-          
-        // })
-        // if(!sessionStorage.getItem(product.name)) {
-        //   state.cart.push(product);
-        // }
-        //
+      else { 
         state.cart.push(product);
       }
     },
     SET_CART_FROM_LOCAL: (state) => {
       if (!state.cart.length) {
         for (let item of state.products) {
-          if (sessionStorage.getItem(item)) {
-            state.cart.push(item);
+          if (localStorage.getItem(item.name)) {
+            state.cart.push(JSON.parse(localStorage.getItem(item.name)));
           }
         }
       }
@@ -82,16 +69,16 @@ export default new Vuex.Store({
     REMOVE_FROM_CART: (state, index) => {
       if (state.cart[index].number > 1) {
         state.cart[index].number -= 1;
-        sessionStorage.setItem(`${state.cart[index].name}`, JSON.stringify(state.cart[index]));
+        localStorage.setItem(`${state.cart[index].name}`, JSON.stringify(state.cart[index]));
       }
       else {
-        sessionStorage.removeItem(state.cart[index].name);
+        localStorage.removeItem(state.cart[index].name);
         state.cart.splice(index, 1);
       }
     },
-    REMOVE_ALL_FROM_CART: (index) => {
-      if(sessionStorage.getItem(index.name)) {
-        sessionStorage.removeItem(index.name);
+    REMOVE_ALL_FROM_CART: (state, index) => {
+      if(localStorage.getItem(state.cart[index].name)) {
+        localStorage.removeItem(state.cart[index].name);
       }
     }
   },
@@ -125,7 +112,5 @@ export default new Vuex.Store({
     ADD_TO_CART_FROM_LOCAL({ commit }) {
       commit('SET_CART_FROM_LOCAL')
     }
-  },
-  modules: {
   }
 })

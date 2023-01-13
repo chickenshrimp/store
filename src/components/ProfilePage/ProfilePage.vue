@@ -3,27 +3,34 @@
         <div class="header">
             <div class="logo">Genius Profile</div>
         </div>
-        <div class="profile">
-            <div class="row">
-                <div class="text">Your Name:</div>
-                <input type="text" id="inp-1">
+        <div class="profile-container">
+            <div class="profile">
+                <img src="" alt="">
+                <div class="text">{{ this.name }} {{ this.surname }}</div>
+                <div class="text">{{ this.city }}</div>
             </div>
+            <div class="profile">
+                <div class="row">
+                    <div class="text">Your Name:</div>
+                    <input type="text" id="inp-1">
+                </div>
 
-            <div class="row">
-                <div class="text">Your Surname:</div>
-                <input type="text" id="inp-2">
+                <div class="row">
+                    <div class="text">Your Surname:</div>
+                    <input type="text" id="inp-2">
+                </div>
+
+                <div class="row">
+                    <div class="text">Your Sity:</div>
+                    <input type="text" id="inp-3">
+                </div>
+                <button class="submit" @click="SubmitInfo()">Submit</button>
+
             </div>
-
-            <div class="row">
-                <div class="text">Your Sity:</div>
-                <input type="text" id="inp-3">
-            </div>
-            <button class="submit" @click="SubmitInfo()">Submit</button>
-
         </div>
 
         <div class="orders">
-            <div class="text" @click="getOrders()">Your previous orders</div>
+            <div class="text text-button" @click="getOrders()">Your previous orders</div>
             <SingleOrder :order_data="ORDERS" v-for="item in ORDERS" :key="item" :order_item_data="item">
             </SingleOrder>
         </div>
@@ -52,33 +59,62 @@ export default {
             }
         }
     },
+    data() {
+        if (localStorage.getItem("user")) {
+            let info = JSON.parse(localStorage.getItem("user"));
+            let name = 'Welcome, ' + info.name;
+            let surname = info.surname;
+            let city = 'from ' + info.city;
+            return {
+                name,
+                surname,
+                city
+            }
+        }
+
+        return {
+            name: '',
+            surname: '',
+            city: ''
+        }
+
+    },
     methods: {
         SubmitInfo() {
-            if (!sessionStorage.getItem("name")) {
-                if (!document.getElementById("inp-1").value) {
-                    alert("Write your name, please");
-                }
-                if (!document.getElementById("inp-2").value) {
-                    alert("Write your surname, please");
-                }
-                if (!document.getElementById("inp-3").value) {
-                    alert("Write your sity, please");
-                }
-                let res = [];
-                res.push(document.getElementById("inp-1").value);
-                res.push(document.getElementById("inp-2").value);
-                res.push(document.getElementById("inp-3").value);
-                sessionStorage.setItem("user", JSON.stringify(res));
-
-                document.getElementById('t-1') ;
+            if (!document.getElementById("inp-1").value) {
+                alert("Write your name, please");
+            }
+            else if (!document.getElementById("inp-2").value) {
+                alert("Write your surname, please");
+            }
+            else if (!document.getElementById("inp-3").value) {
+                alert("Write your sity, please");
+            }
+            else {
+                let res = {
+                    name: document.getElementById("inp-1").value,
+                    surname: document.getElementById("inp-2").value,
+                    city: document.getElementById("inp-3").value
+                };
+                localStorage.setItem("user", JSON.stringify(res));
+                const info = JSON.parse(localStorage.getItem("user"));
+                this.name = 'Welcome, ' + info.name;
+                this.surname = info.surname;
+                this.city = 'from ' + info.city;
             }
         },
         ...mapActions([
-            "GET_ORDERS"
+            "GET_ORDERS",
+            'GET_PRODUCTS_FROM_API',
+            'ADD_TO_CART_FROM_LOCAL'
         ]),
         getOrders() {
             this.GET_ORDERS();
         }
+    },
+    mounted() {
+        this.GET_PRODUCTS_FROM_API(),
+        this.ADD_TO_CART_FROM_LOCAL()
     }
 }
 </script>
@@ -87,6 +123,15 @@ export default {
 li {
     display: inline-block;
     margin: 15px 40px;
+}
+
+.profile-container {
+    flex-direction: row;
+    margin-top: 60px;
+    justify-content: center;
+    flex: auto;
+    background-color: rgba(180, 135, 84, 0.1);
+    padding-bottom: 30px;
 }
 
 .row {
@@ -102,6 +147,9 @@ li {
     font-weight: 500;
     padding-top: 7px;
     font-size: 18px;
+}
+
+.text-button {
     cursor: pointer;
 }
 
@@ -150,12 +198,9 @@ li {
 }
 
 .profile {
-    margin-top: 60px;
-    flex-direction: column;
-    justify-content: center;
     flex: auto;
-    background-color: rgba(180, 135, 84, 0.1);
-    padding-bottom: 30px;
+    margin: auto;
+    flex-direction: column;
 }
 
 input {
@@ -179,5 +224,9 @@ input {
     font-size: 23px;
     color: #490a11;
     font-family: SomeCoolFont2;
+}
+
+.submit:active {
+    background-color: rgba(219, 88, 23, 0.329)
 }
 </style>

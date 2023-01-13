@@ -38,7 +38,9 @@ export default {
     methods: {
         addItemToCart() {
             this.$emit('addItemToCart', this.product_data);
-            sessionStorage.setItem(`${this.product_data.name}`, JSON.stringify(this.product_data));
+            if (!localStorage.getItem(`${this.product_data.name}`)) {
+                localStorage.setItem(`${this.product_data.name}`, JSON.stringify(this.product_data));
+            }  
         },
         showPopupInfo() {
             this.isInfoPopupVisible = true;
@@ -86,6 +88,10 @@ img {
     font-size: 23px;
     color: #490a11;
     font-family: SomeCoolFont2;
+}
+
+.add-to-cart:active {
+    background-color: rgba(219, 88, 23, 0.329)
 }
 
 li {

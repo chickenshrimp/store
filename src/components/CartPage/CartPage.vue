@@ -36,6 +36,7 @@ export default {
   components: { CartItem },
   computed: {
     ...mapGetters([
+      'PRODUCTS',
       'CART'
     ]),
     cartTotalCost() {
@@ -64,6 +65,7 @@ export default {
     ...mapActions([
       'DELETE_FROM_CART',
       'DELETE_ALL',
+      'GET_PRODUCTS_FROM_API',
       'ADD_TO_CART_FROM_LOCAL'
     ]),
     deleteFromCart(index) {
@@ -73,27 +75,30 @@ export default {
       if (!this.CART.length) {
         alert('There is no goods in the cart!');
       }
+      else if (!localStorage.getItem("user")) {
+        alert('Please write some information about yourself first!')
+      }
       else {
         let checkOrder = 1;
-        while (sessionStorage.getItem(checkOrder)) {
+        while (localStorage.getItem(checkOrder)) {
           checkOrder += 1;
         }
         const order = {
           date: new Date(),
-          cost: 0,
-          goods: []
+          cost: 0
         }
         let res = Object.create(order);
         res.date = (' ' + new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate() + ' ' +
           new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds());
-        for(let index of this.CART) {
+        for (let index of this.CART) {
           res.cost += index.number * index.cost;
         }
-        
-        sessionStorage.setItem(checkOrder, JSON.stringify(res));
+        res.cost = res.cost.toFixed(1);
 
-        for(let index of this.CART) {
-          this.DELETE_ALL(index);
+        localStorage.setItem(checkOrder, JSON.stringify(res));
+
+        for (let product = 0; product < this.CART.length; product++) {
+          this.DELETE_ALL(product);
         }
 
         this.CART.splice(this.CART[0], this.CART.length);
@@ -101,12 +106,13 @@ export default {
     }
   },
   mounted() {
+    this.GET_PRODUCTS_FROM_API(),
     this.ADD_TO_CART_FROM_LOCAL()
   }
 }
 </script>
 
-<style scoped>
+<style>
 li {
   display: inline-block;
   margin: 15px 40px;
@@ -136,6 +142,10 @@ li {
   font-size: 23px;
   color: #490a11;
   font-family: SomeCoolFont2;
+}
+
+.order:active {
+  background-color: rgba(219, 88, 23, 0.329)
 }
 
 .bag {

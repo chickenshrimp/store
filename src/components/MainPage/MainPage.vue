@@ -37,20 +37,23 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'PRODUCTS'
+      'PRODUCTS',
+      'CART'
     ])
   },
   methods: {
     ...mapActions([
       'GET_PRODUCTS_FROM_API',
-      'ADD_TO_CART'
+      'ADD_TO_CART',
+      'ADD_TO_CART_FROM_LOCAL'
     ]),
     addItemToCart(data) {
       this.ADD_TO_CART(data)
     }
   },
   mounted() {
-    this.GET_PRODUCTS_FROM_API()
+    this.GET_PRODUCTS_FROM_API(),
+    this.ADD_TO_CART_FROM_LOCAL()
   },
   
 }
